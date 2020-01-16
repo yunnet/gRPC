@@ -10,7 +10,7 @@ def client():
     channel = grpc.insecure_channel(ipAddr)
 
     stub = GreeterStub(channel)
-    response = stub.SayHello(HelloRequest(name="world"))
+    response = stub.SayHello(HelloRequest(name="python"))
     print("Greeter client received: " + response.message)
 
 if __name__ == '__main__':
