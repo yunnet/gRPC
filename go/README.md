@@ -6,6 +6,7 @@ gRPC for golang
     https://github.com/protocolbuffers/protobuf/releases  当前版本protoc-3.11.2-win64.zip
     2、go插件
     go install github.com/golang/protobuf/protoc-gen-go 当前会生成protoc-gen-go.exe 在GOPATH\bin目录下
+	3、go mod
 ### 生成代码
     protoc --go_out=plugins=grpc:./ helloworld.proto 生成helloworld.pb.go文件
     
