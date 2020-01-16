@@ -10,7 +10,7 @@ public class GreeterImpl extends GreeterGrpc.GreeterImplBase{
 	@Override
 	public void sayHello(HelloRequest request, StreamObserver<HelloReply> response) {
 		System.out.println("recv: " + request.getName());
-		String msg = "Hello " + request.getName(); 
+		String msg = "from golang server, Hello " + request.getName(); 
 		
 		HelloReply reply = HelloReply.newBuilder().setMessage(msg).build();
 		response.onNext(reply);

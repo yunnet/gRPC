@@ -15,7 +15,7 @@ type serve struct {}
 
 func (c *serve)SayHello(ctx context.Context, in *pb.HelloRequest)(*pb.HelloReply, error)  {
 	log.Println("recv: " + in.Name)
-	return &pb.HelloReply{Message:"Hello " + in.Name}, nil
+	return &pb.HelloReply{Message:"from golang server, Hello " + in.Name}, nil
 }
 
 func main() {
