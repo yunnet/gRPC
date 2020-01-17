@@ -4,9 +4,11 @@ var messages = require('./helloworld_pb')
 var grpc = require('grpc')
 
 function sayHello(call, callback){
-  console.log(call)
+  console.log('recv: ' + call.request.getName())
+
   var reply = new messages.HelloReply()
   reply.setMessage("from Node server, Hello " + call.request.getName())
+  
   callback(null, reply)
 }
 

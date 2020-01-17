@@ -76,17 +76,35 @@ public class RpcClient {
 		System.out.println("sync Greeting: " + response.getMessage());
 	}
 	
-	
-	
 	public static void main(String[] args) throws Exception {
 		String host = "127.0.0.1";
 		int port = 50051;
 		
 		RpcClient app = new RpcClient(host, port);
 		
-		app.doSync("master");
-		app.doAsync("boss");
-		app.doFuture("guy");
+		long t = System.currentTimeMillis();
+		for(int i = 0; i<10000; i++) {
+			app.doSync("master" + i);
+		}
+		long t_end = (System.currentTimeMillis() - t)/1000;
+		
+		
+		long t1 = System.currentTimeMillis();
+		for(int i = 0; i<10000; i++) {
+			app.doAsync("boss" + i);
+		}
+		long t1_end = (System.currentTimeMillis() - t1)/1000;
+		
+		
+		long t2 = System.currentTimeMillis();
+		for(int i = 0; i<10000; i++) {
+			app.doFuture("guy" + i);
+		}
+		long t2_end = (System.currentTimeMillis() - t2)/1000;
+		
+		System.out.println("Sync spend time: " + t_end);
+		System.out.println("Async spend time: " + t1_end);
+		System.out.println("Future spend time: " + t2_end);
 		
 		app.shutdown();	
 	}

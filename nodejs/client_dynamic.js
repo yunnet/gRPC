@@ -19,11 +19,12 @@ var hello_proto = grpc.loadPackageDefinition(packageDefinition).helloworld
 
 function main() {
   var client = new hello_proto.Greeter('localhost:50051', grpc.credentials.createInsecure())
-
-  var user = 'nodejs'
-  client.sayHello({name: user}, function (err, resp){
-    console.log('Greeting: ', resp.message)
-  })
+  
+  for(var i = 0; i <1000; i++) {
+    client.sayHello({name: 'nodejs' + i}, function(err, resp){
+      console.log('Greeting: ', resp.message)
+    })
+  }  
 }
 
 main()

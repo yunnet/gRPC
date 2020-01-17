@@ -5,12 +5,12 @@ import (
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"log"
-	"os"
+	"strconv"
+	"time"
 )
 
 const (
-	address     = "localhost:50051"
-	defaultName = "golang"
+	address = "localhost:50051"
 )
 
 func main() {
@@ -22,14 +22,16 @@ func main() {
 	defer conn.Close()
 	c := pb.NewGreeterClient(conn)
 
-	// Contact the server and print out its response.
-	name := defaultName
-	if len(os.Args) > 1 {
-		name = os.Args[1]
+	t := time.Now()
+
+	for i := 0; i < 100; i++ {
+		r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: "golang" + strconv.Itoa(i)})
+		if err != nil {
+			log.Fatalf("could not greet: %v", err)
+		}
+		log.Printf("Greeting response: %s", r.Message)
 	}
-	r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name})
-	if err != nil {
-		log.Fatalf("could not greet: %v", err)
-	}
-	log.Printf("Greeting response: %s", r.Message)
+
+	t_end := time.Now()
+	log.Printf("spend time: %f", t_end.Sub(t).Seconds())
 }
