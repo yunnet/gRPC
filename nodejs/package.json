@@ -5,7 +5,7 @@
   "main": "client.js",
   "dependencies": {
     "google-protobuf": "^3.11.2",
-    "grpc": "^1.24.2",
+    "grpc": "^1.24.9",
     "grpc-tools": "^1.8.1"
   },
   "devDependencies": {},
